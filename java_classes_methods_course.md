@@ -3,6 +3,10 @@
 **An interactive, exercise-driven course**
 Based on CMSC 23 LEC 03 — University of the Philippines Manila
 
+> **Want your answers checked?** Every ⭐ exercise and the 🏆 capstone can be written and
+> graded in the [interactive trainer](https://polandreei.github.io/LearnJava_Classes_Methods/) —
+> it compiles and runs your Java in the browser, then checks both its output and its structure.
+
 ---
 
 ## How This Course Works

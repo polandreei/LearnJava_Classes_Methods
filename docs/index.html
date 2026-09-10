@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Java Classes &amp; Methods — Interactive Trainer</title>
+<meta name="description" content="Write Java in the browser and have it compiled, run and structurally checked. Companion to the CMSC 23 LEC 03 course.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
+<link rel="stylesheet" href="vendor/codemirror/codemirror.min.css">
+<link rel="stylesheet" href="vendor/codemirror/theme/material-darker.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="boot" id="boot">
+  <div class="card">
+    <h2>Starting the Java toolchain</h2>
+    <p id="bootmsg">Waking up…</p>
+    <div class="bar"><i></i></div>
+    <p class="note">
+      A complete JVM and Java compiler are being downloaded and run <b>inside your browser</b>.
+      Nothing is sent to a server. The first visit fetches a few megabytes; after that it is cached.
+    </p>
+  </div>
+</div>
+
+<div class="app" id="app" hidden>
+
+  <div class="topbar">
+    <div class="brand">Java Classes &amp; <span>Methods</span><small>Interactive trainer</small></div>
+    <div class="exnav">
+      <div class="progress" title="Exercises passed">
+        <span id="progtext">0 / 11</span>
+        <span class="bar"><i id="progbar"></i></span>
+      </div>
+      <button class="navbtn" id="prev" title="Previous exercise">‹</button>
+      <select id="picker" aria-label="Choose exercise"></select>
+      <button class="navbtn" id="next" title="Next exercise">›</button>
+    </div>
+  </div>
+
+  <div class="panes">
+
+    <section class="pane" id="instrpane">
+      <header>Instructions</header>
+      <div class="body" id="instructions"></div>
+    </section>
+
+    <section class="pane">
+      <header>
+        Code
+        <span style="margin-left:auto;font-weight:500;text-transform:none;letter-spacing:0;font-size:11.5px"
+              id="autosave">saved locally</span>
+      </header>
+      <div class="tabs" id="tabs"></div>
+      <div class="editor-wrap">
+        <div class="readonly-banner" id="robanner" hidden>read-only · provided for you</div>
+        <textarea id="code"></textarea>
+      </div>
+    </section>
+
+    <section class="pane">
+      <header>Output</header>
+      <div class="outtabs" id="outtabs">
+        <button class="otab active" data-tab="console">Console</button>
+        <button class="otab" data-tab="expected">Expected</button>
+        <button class="otab" data-tab="checks">Checks <span class="dot" id="checkdot"></span></button>
+      </div>
+      <div class="body" id="outbody" style="padding:0">
+        <pre class="console" id="console"><span class="sys">Press Run to compile and execute your code.</span></pre>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="actionbar">
+    <button class="btn ghost" id="reset">Reset code</button>
+    <button class="btn ghost" id="hintbtn">Hint</button>
+    <div class="spacer"></div>
+    <div class="status" id="status"></div>
+    <button class="btn" id="run">Run</button>
+    <button class="btn primary" id="check">Check answer</button>
+  </div>
+
+</div>
+
+<script src="vendor/codemirror/codemirror.min.js"></script>
+<script src="vendor/codemirror/mode/clike.min.js"></script>
+<script src="vendor/codemirror/closebrackets.min.js"></script>
+<script src="vendor/codemirror/matchbrackets.min.js"></script>
+<script src="js/exercises.js"></script>
+<script src="js/solutions.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/ui.js"></script>
+</body>
+</html>

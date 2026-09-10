@@ -3,6 +3,7 @@
 A self-paced, exercise-driven course on Java classes, objects, and methods — ten sections, each with hands-on lessons, a section exercise with a worked solution, and a checkpoint quiz.
 
 **➜ [Start the course](java_classes_methods_course.md)**
+**➜ [Open the interactive trainer](https://polandreei.github.io/LearnJava_Classes_Methods/)** — write the exercises in your browser and have them checked
 
 ---
 
@@ -64,14 +65,36 @@ Plus four appendices: a syntax cheat sheet, a table of common compiler errors an
 
 Sections build on each other — 7 sets up 8, 5 sets up 9, and the capstone assumes all nine. Work them in order.
 
+## The interactive trainer
+
+The course tells you what to build but cannot tell you whether you built it. The
+[trainer](https://polandreei.github.io/LearnJava_Classes_Methods/) closes that loop:
+it compiles and runs your code **in the browser** — no server, nothing uploaded — and
+grades it.
+
+It checks more than printed output, because several exercises are about structure that
+output cannot reveal. Section 8 is the clearest case: its brief requires behaviour
+identical to Section 7, so pasting your Section 7 answer prints exactly the right thing
+while missing the whole point. The trainer catches that.
+
+- **56 reflection checks** run inside the JVM against your compiled classes — field
+  modifiers, return types, overload counts, constructor counts.
+- **9 source checks** cover what compiles away entirely, above all whether a
+  constructor delegates with `this(...)`.
+- Real compiler diagnostics, progressive hints, and the solution when you want it.
+
+See [`docs/README.md`](docs/README.md) for how it works and its limitations.
+
 ## Code verification
 
-Every solution block in Sections 1–9 has been compiled and run against its stated expected output. All match.
+Every solution block in the course has been compiled and run against its stated
+expected output, and all eleven trainer exercises are re-verified end to end — all
+65 checks pass against the reference solutions.
 
-Two caveats:
+Two things worth knowing:
 
 - **Section 4** prints `87.80000000000001` where the exercise specification shows `87.8`. This is `double` binary representation, not a bug, and Lesson 4's "Note on decimals" explains it and gives the `printf` fix.
-- **Section 10 (capstone)** is a specification rather than a provided solution, so its sample output is a target to hit, not verified output from shipped code.
+- **Section 10 (capstone)** ships no solution in the course text, so its sample output was verified against a reference implementation written for the trainer.
 
 ## Repository contents
 
@@ -79,6 +102,7 @@ Two caveats:
 | --- | --- |
 | [`java_classes_methods_course.md`](java_classes_methods_course.md) | The course — all ten sections and four appendices |
 | [`HANDOFF.md`](HANDOFF.md) | Maintainer notes: provenance, design decisions, known gaps, what to do next |
+| [`docs/`](docs/) | The interactive trainer — a browser IDE that compiles, runs and checks the exercises |
 
 If you plan to change anything in here, read `HANDOFF.md` first — several things that look like mistakes are deliberate. Section 7's `Pizza` class has duplicated code **on purpose**, because Section 8 refactors it.
 

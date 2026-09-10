@@ -278,7 +278,7 @@ async function doRun(grade) {
       setOut("console");
     }
   } catch (e) {
-    last = { compiled: false, diagnostics: "Engine error: " + (e && e.message ? e.message : e), checks: [] };
+    last = { compiled: false, diagnostics: "Engine error: " + Engine.describe(e), checks: [] };
     setOut("console");
   } finally { busy(false); }
 }
@@ -356,7 +356,7 @@ async function main() {
     b.classList.add("failed");
     b.querySelector(".card").innerHTML =
       "<h2>The Java toolchain could not start</h2>" +
-      '<p>' + esc(e && e.message ? e.message : String(e)) + "</p>" +
+      "<p>" + esc(Engine.describe(e)) + "</p>" +
       '<p class="note">This needs a modern browser with WebAssembly, and the page must be served over ' +
       "http(s) — opening the file directly from disk will not work. Try reloading; if it persists, " +
       "the course text and all solutions are still readable in the repository.</p>";

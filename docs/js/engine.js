@@ -7,7 +7,13 @@
 const Engine = (() => {
 
   const CHEERPJ = "https://cjrtnc.leaningtech.com/4.3/loader.js";
-  const CLASSPATH = "/app/lib/ecj-3.26.0.jar:/app/lib/harness.jar";
+
+  /* CheerpJ's /app/ mount maps to the *web server root*, not to this page's
+     directory. On project GitHub Pages the site lives under /<repo>/, so the
+     jars must be addressed with that prefix or they 404. Derive it from the
+     current path so the same build works locally at / and on Pages. */
+  const BASE = location.pathname.replace(/\/[^/]*$/, "/");
+  const CLASSPATH = "/app" + BASE + "lib/ecj-3.26.0.jar:/app" + BASE + "lib/harness.jar";
 
   let LIB = null, HARNESS = null, booted = false, bootPromise = null;
 
@@ -21,6 +27,18 @@ const Engine = (() => {
       for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
       return new TextDecoder("utf-8").decode(bytes);
     } catch (e) { return ""; }
+  }
+
+  /* CheerpJ rejects with Java objects and bare strings, neither of which
+     survives String(); doing that inside a catch block masks the real error. */
+  function describe(e) {
+    try {
+      if (e == null) return "unknown error";
+      if (typeof e === "string") return e;
+      if (e instanceof Error) return e.message || e.name;
+      if (typeof e.message === "string") return e.message;
+      return "the Java runtime reported an error";
+    } catch (_) { return "unknown error"; }
   }
 
   function loadScript(src) {
@@ -225,7 +243,7 @@ const Engine = (() => {
     return { match: normalise(actual) === normalise(expected), rows };
   }
 
-  return { boot, submit, diffOutput, normalise, isReady: () => booted,
+  return { boot, submit, diffOutput, normalise, describe, isReady: () => booted,
            _internal: { constructorsOf, stripCommentsAndStrings, firstStatement, runSourceCheck } };
 })();
 
